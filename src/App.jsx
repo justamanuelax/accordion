@@ -64,9 +64,9 @@ function App() {
       text: PropTypes.string,
       onIsOpen: PropTypes.func,
       curOpen: PropTypes.number,
-      children: PropTypes.string
+      children: PropTypes.array 
     };
-
+    
     // Boolean to check if the current item is open.
     const isOpen = num === curOpen;
 
