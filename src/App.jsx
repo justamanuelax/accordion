@@ -28,27 +28,32 @@ function App() {
   )
   
   function Accordion({data}){
+    const [curOpen, setIsOpen] = useState(0);
     Accordion.propTypes = {
       data: PropTypes.array
     }
     return <div className="accordion">
       {data.map((el, i) =>
          ( 
-         <AccordionItem key={i} title={el.title} text={el.text} num={i} /> 
+         <AccordionItem key={i} title={el.title} num={i} curOpen={curOpen} onIsOpen={setIsOpen}>{el.text}</AccordionItem> 
           ))}
     </div>
   }
   
-  function AccordionItem({num, title, text}){
+  function AccordionItem({num, title, children, onIsOpen, curOpen}){
     AccordionItem.propTypes = {
       num: PropTypes.number,
       title: PropTypes.string,
-      text: PropTypes.string
+      text: PropTypes.string,
+      onIsOpen: PropTypes.func,
+      curOpen: PropTypes.number,
+      children: PropTypes.string
     }
-    const [isOpen, setIsOpen] = useState(false);
+
+    const  isOpen = num === curOpen;
 
     function handleToggle(){
-        setIsOpen(isOpen => !isOpen)
+        onIsOpen(num);
     }
 
     return(
@@ -57,7 +62,7 @@ function App() {
       <p className="num">{num < 9 ? `0${num + 1}` : `${num + 1}`}</p>
       <p className="text">{title}</p>
       <p className="icon">{isOpen ? '+' : '-'}</p>
-    {isOpen &&  <div className="content-box">{text}</div>}
+    {isOpen &&  <div className="content-box">{children}</div>}
       </div>
       </>
 
