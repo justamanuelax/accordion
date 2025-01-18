@@ -84,7 +84,7 @@ function App() {
           {/* Displaying the item title */}
           <p className="text">{title}</p>
           {/* Displaying an icon that toggles based on open/closed state */}
-          <p className="icon">{isOpen ? "+" : "-"}</p>
+          <p className="icon">{isOpen ? "-" : "+"}</p>
           {/* Content box shown only if the item is open */}
           {isOpen && <div className="content-box">{children}</div>}
         </div>
